@@ -35,7 +35,8 @@ Desenvolvedores de soluções antifraude
 Pesquisadores em segurança digital
 
 ✨ Autor
-📌 Maikol Vieira de Oliveira - LinkedIn: https://www.linkedin.com/in/maikololiveira/
+Maikol Vieira de Oliveira
+📌 LinkedIn: https://www.linkedin.com/in/maikololiveira/
 
 Estrategista de Dados, Automação de Processos e Inovação, com mais de 15 anos de experiência em soluções digitais para bancos, telecom, educação e fintechs.
 Atua no desenvolvimento de sistemas escaláveis que unem IA, automação de processos e governança de dados para fortalecer a segurança da informação.
