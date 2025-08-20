@@ -34,7 +34,7 @@ Gestores de risco e compliance
 Desenvolvedores de soluções antifraude
 Pesquisadores em segurança digital
 
-✨ Autor
+✨ Autor:
 Maikol Vieira de Oliveira
 
 📌 LinkedIn: https://www.linkedin.com/in/maikololiveira/
