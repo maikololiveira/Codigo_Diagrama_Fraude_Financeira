@@ -35,7 +35,6 @@ Desenvolvedores de soluções antifraude
 Pesquisadores em segurança digital
 
 ✨ Autor
-
 Maikol Vieira de Oliveira
 
 📌 LinkedIn: https://www.linkedin.com/in/maikololiveira/
