@@ -1,0 +1,73 @@
+---
+config:
+  layout: dagre
+---
+erDiagram
+	direction TB
+	ESTRATEGIA_CRIMINOSA {
+		string Seleciona_Vitimas 
+		int Qtde_Vitimas
+	}
+	USUARIO_FINAL {
+		string Tipo_Vitima  
+		string Nivel_Vitima  
+	}
+	PHISHING {
+		string Canal_Email  
+		string Canal_SMS  
+		string Apps_Sites_Fake   
+	}
+	CANAL_EMAIL {
+		string Propagandas
+		string Atualizacao_Cadastral
+		string Rastreamento_Pedido
+	}
+	CANAL_SMS {
+		string Resete_Senha
+		string Premios
+		string Codigo_Promocional
+	}
+	APPS_SITES_FAKE {
+		string Compras
+		string Cadastros
+		string Visitas
+	}
+	DEEPFAKE_IDENTIDADEFAKE {
+		string Documentos_Gerados_IA  
+		boolean Reconhecimento_Facial_Falso  
+	}
+	LAVAGEM_DINHEIRO {
+		float Meios_Cripto  
+		float Meios_Apostas  
+		float Meios_Fintechs  
+		float Imoveis_Moveis  
+	}
+	CRIPTOS {
+		float Moedas_Digitais
+	}
+	APOSTAS {
+		float Casas_Apostas
+	}
+	FINTECHS {
+		float Startups
+	}
+	IMOVEIS_MOVEIS {
+		float Vida_Luxuosa
+	}
+	INFLUENCERS {
+		float Redes_Sociais
+	}
+	ESTRATEGIA_CRIMINOSA||--o{USUARIO_FINAL:"inicia ataque"
+	USUARIO_FINAL||--o{PHISHING:"sofre ataque via"
+	CANAL_EMAIL||--o{DEEPFAKE_IDENTIDADEFAKE:"captura dados"
+	CANAL_SMS||--o{DEEPFAKE_IDENTIDADEFAKE:"captura dados"
+	PHISHING ||--o{ CANAL_EMAIL: "Tipos"
+	PHISHING ||--o{ CANAL_SMS: "Tipos"
+	PHISHING ||--o{ APPS_SITES_FAKE: "Tipos"
+	APPS_SITES_FAKE||--o{DEEPFAKE_IDENTIDADEFAKE:"captura dados"
+	DEEPFAKE_IDENTIDADEFAKE||--o{LAVAGEM_DINHEIRO:"acessa recursos para"
+	LAVAGEM_DINHEIRO ||--o{ CRIPTOS: "Caminhos"
+	LAVAGEM_DINHEIRO ||--o{ APOSTAS: "Caminhos"
+	LAVAGEM_DINHEIRO ||--o{ FINTECHS: "Caminhos"
+	LAVAGEM_DINHEIRO ||--o{ IMOVEIS_MOVEIS: "Caminhos"
+	LAVAGEM_DINHEIRO ||--o{ INFLUENCERS: "Caminhos"
