@@ -1,0 +1,94 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+ subgraph S1["Coleta & Ingestão de Dados"]
+        A1["APIs Bancárias\nSistemas Legados"]
+        A2["Pagamentos\nPIX/FedNow"]
+        A3["Logs de Acesso\nDevice/Geo"]
+        A4["Dados Cadastrais/KYC"]
+        A5["Blacklist/Watchlist AML"]
+        INJ["Ingestão/Streaming\nKafka · ETL · Batch"]
+  end
+ subgraph S2["Preparação & Feature Engineering"]
+        P1["Limpeza/Imputação"]
+        P2["Normalização/Encoding"]
+        P3["Feature Engineering\nfreq. compras, janelas temporais,\ndevice fingerprint, distância geo"]
+  end
+ subgraph S3["Modelagem & Score (ML/AI)"]
+        M1["Modelo Supervisionado\nRandom Forest · XGBoost"]
+        M2["Detecção de Anomalias\nIsolation Forest · Autoencoder"]
+        SC["Score de Risco 0..1"]
+  end
+ subgraph S4["Política de Decisão"]
+        D1{"Score >= T_alta?"}
+        D2{"Score >= T_media?"}
+        AALTO["Acionar RPA:\nBloquear/2FA/Freeze"]
+        AMEDIO["Fila Analista: Revisão Humana"]
+        ABAIXO["Aprovar Fluxo Normal"]
+  end
+ subgraph S5["Ação, Auditoria & Observabilidade"]
+        RPA["Orquestração RPA\nUiPath · Power Automate"]
+        TKT["Ticket/Case\nJira · ServiceNow"]
+        LOG["Logs Imutáveis\nAuditoria/Regulatório"]
+        BI["Dashboards\nPower BI · Tableau · Grafana"]
+        METRICS["Métricas: Precision/Recall,\nFalsos Positivos, SLA"]
+  end
+ subgraph S6["Ciclo de Melhoria Contínua"]
+        DRIFT["Monitorar Drift de Dados/Modelo"]
+        RETRAIN["Re‑treino Programado\nMLflow · Pipeline CI/CD"]
+        GOVERN["Governança & XAI\nSHAP/LIME · Fairness · LGPD/GDPR"]
+  end
+    A1 --> INJ
+    A2 --> INJ
+    A3 --> INJ
+    A4 --> INJ
+    A5 --> INJ
+    INJ --> P1
+    P1 --> P2
+    P2 --> P3
+    P3 --> M1 & M2
+    M1 --> SC
+    M2 --> SC
+    SC --> D1
+    D1 -- Sim --> AALTO
+    D1 -- Não --> D2
+    D2 -- Sim --> AMEDIO
+    D2 -- Não --> ABAIXO
+    AALTO --> RPA & LOG
+    RPA --> TKT
+    AMEDIO --> TKT & LOG
+    ABAIXO --> LOG
+    LOG --> BI & METRICS & GOVERN
+    METRICS --> DRIFT & GOVERN
+    DRIFT --> RETRAIN
+    RETRAIN --> M1
+     A1:::ingest
+     A2:::ingest
+     A3:::ingest
+     A4:::ingest
+     A5:::ingest
+     INJ:::ingest
+     P1:::prep
+     P2:::prep
+     P3:::prep
+     M1:::model
+     M2:::model
+     SC:::model
+     D1:::policy
+     D2:::policy
+     RPA:::ops
+     TKT:::ops
+     LOG:::ops
+     BI:::ops
+     METRICS:::ops
+     DRIFT:::improve
+     RETRAIN:::improve
+     GOVERN:::improve
+    classDef ingest fill:#E8F4FF,stroke:#6AA6FF,stroke-width:1px
+    classDef prep fill:#F2FFF6,stroke:#54C27A,stroke-width:1px
+    classDef model fill:#FFF6E6,stroke:#FFAF3F,stroke-width:1px
+    classDef policy fill:#FFF0F0,stroke:#FF6B6B,stroke-width:1px
+    classDef ops fill:#F4F2FF,stroke:#8B7CFF,stroke-width:1px
+    classDef improve fill:#F9F9F9,stroke:#A0A0A0,stroke-width:1px
