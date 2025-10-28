@@ -1,0 +1,59 @@
+---
+config:
+  layout: dagre
+---
+erDiagram
+  direction TB
+
+  TRANSACTION_API_INGESTION {
+    string Name
+    string ID_Number
+    string Amount
+    datetime DateTime
+  }
+
+  DATA_TRANSFORMATION {
+    string Transaction_Type
+    string IP_Location
+    boolean Suspicious_Device
+  }
+
+  AI_FRAUD_CLASSIFIER {
+    string Email_Channel
+    string SMS_Channel
+    string Apps_Sites_Fake
+    boolean Social_Engineering_Used
+  }
+
+  RISK_SCORING {
+    float Score
+    string Risk_Level
+  }
+
+  AUTOMATED_RPA_ACTION {
+    boolean Automated_Block
+    boolean Fraud_Alert
+    boolean Ticket_Created
+  }
+
+  ANALYTICAL_DASHBOARD {
+    boolean Dashboard_Active
+    string Responsible_Name
+    datetime Last_Update
+  }
+
+  MANUAL_REVIEW_AUDIT {
+    string Alert_Type
+    string Manual_Action_Channel
+    string Analyst_Justification
+    datetime Record_Date
+  }
+
+  %% Relationships
+  TRANSACTION_API_INGESTION ||--o{ DATA_TRANSFORMATION : "raw data"
+  DATA_TRANSFORMATION ||--o{ AI_FRAUD_CLASSIFIER : "processed data"
+  AI_FRAUD_CLASSIFIER ||--o{ RISK_SCORING : "assign score"
+  RISK_SCORING ||--o{ AUTOMATED_RPA_ACTION : "define action"
+  AUTOMATED_RPA_ACTION ||--o{ ANALYTICAL_DASHBOARD : "send metrics"
+  ANALYTICAL_DASHBOARD ||--o{ MANUAL_REVIEW_AUDIT : "trigger review"
+  AUTOMATED_RPA_ACTION ||--o{ MANUAL_REVIEW_AUDIT : "manual audit"
