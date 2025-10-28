@@ -1,0 +1,73 @@
+---
+config:
+  layout: dagre
+---
+erDiagram
+direction TB
+CRIMINAL_STRATEGY {
+string Selects_Victims
+int Victim_Count
+}
+USER_VICTIM {
+string Victim_Type
+string Victim_Level
+}
+PHISHING {
+string Email_Channel
+string SMS_Channel
+string Fake_Apps_Sites
+}
+EMAIL_CHANNEL {
+string Promotions
+string Account_Update
+string Order_Tracking
+}
+SMS_CHANNEL {
+string Password_Reset
+string Prizes
+string Promo_Code
+}
+FAKE_APPS_SITES {
+string Purchases
+string Registrations
+string Visits
+}
+DEEPFAKE_IDENTITY_FAKE {
+string AI_Generated_Documents
+boolean Facial_Recognition_Fake
+}
+MONEY_LAUNDERING {
+float Crypto_Assets
+float Betting_Platforms
+float Fintech_Assets
+float Real_Estate_Assets
+}
+CRYPTOS {
+float Digital_Coins
+}
+BETS {
+float Betting_Houses
+}
+FINTECHS {
+float Startups
+}
+REAL_ESTATE {
+float Luxury_Lifestyle
+}
+INFLUENCERS {
+float Social_Networks
+}
+CRIMINAL_STRATEGY||--o{USER_VICTIM:"initiates attack"
+USER_VICTIM||--o{PHISHING:"suffers attack via"
+EMAIL_CHANNEL||--o{DEEPFAKE_IDENTITY_FAKE:"captures data"
+SMS_CHANNEL||--o{DEEPFAKE_IDENTITY_FAKE:"captures data"
+PHISHING ||--o{ EMAIL_CHANNEL: "Types"
+PHISHING ||--o{ SMS_CHANNEL: "Types"
+PHISHING ||--o{ FAKE_APPS_SITES: "Types"
+FAKE_APPS_SITES||--o{DEEPFAKE_IDENTITY_FAKE:"captures data"
+DEEPFAKE_IDENTITY_FAKE||--o{MONEY_LAUNDERING:"accesses resources for"
+MONEY_LAUNDERING ||--o{ CRYPTOS: "Paths"
+MONEY_LAUNDERING ||--o{ BETS: "Paths"
+MONEY_LAUNDERING ||--o{ FINTECHS: "Paths"
+MONEY_LAUNDERING ||--o{ REAL_ESTATE: "Paths"
+MONEY_LAUNDERING ||--o{ INFLUENCERS: "Paths"
